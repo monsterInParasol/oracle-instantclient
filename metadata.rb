@@ -1,0 +1,7 @@
+name             'oracle-instantclient'
+maintainer       'YOUR_NAME'
+maintainer_email 'YOUR_EMAIL'
+license          'All rights reserved'
+description      'Installs/Configures oracle-instantclient'
+long_description 'Installs/Configures oracle-instantclient'
+version          '0.1.0'
