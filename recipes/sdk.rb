@@ -17,6 +17,6 @@
 # limitations under the License.
 #
 
-install_rpm 'sdk' do
+install_rpm do
   pkg 'sdk'
 end

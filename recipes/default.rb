@@ -17,8 +17,10 @@
 # limitations under the License.
 #
 
-package 'alien'
+%w(alien libaio1).each do |pkg|
+  package pkg
+end
 
-install_rpm 'basic' do
-  pkg 'basic'
+install_rpm do
+ pkg 'basic'
 end

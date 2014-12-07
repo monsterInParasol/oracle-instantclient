@@ -17,6 +17,15 @@
 # limitations under the License.
 #
 
-install_rpm 'sqlplus' do
+install_rpm do
   pkg 'sqlplus'
 end
+
+file '/etc/ld.so.conf.d/oracle.conf' do
+  content ("/usr/lib/oracle/#{node['oracle-instantclient']['version']}/client"+
+      "#{if node['kernel']['machine'] == 'x86_64' then '64' else '' end}/lib/")
+  owner 'root'
+  mode 00600
+end
+
+execute 'ldconfig'
