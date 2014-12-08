@@ -17,12 +17,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-execute 'install sqldeveloper' do
+execute "unzip #{node['oracle-instantclient']['sqldeveloper-zip']} -d /opt" do
   user 'root'
   cwd node['oracle-instantclient']['rpm_dir']
-  command "unzip #{node['oracle-instantclient']['sqldeveloper-zip']} -d /opt"
-  sd = 'sqldevelper'
+  creates '/opt/sqldeveloper'
+end
+
+bash 'symlink to sqldeveloper' do
+  sd = 'sqldeveloper'
   bin_path = "/opt/#{sd}/#{sd}/bin/#{sd}"
-  command "chmod 755 #{bin_path}"
-  command "ln -sf #{bin_path} /usr/local/bin/#{sd}"
+  code = <<-EOF
+    "chmod 755 #{bin_path}"
+    "ln -sf #{bin_path} /usr/local/bin/#{sd}"
+    EOF
 end
