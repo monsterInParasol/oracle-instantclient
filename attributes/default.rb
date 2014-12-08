@@ -27,6 +27,9 @@ default['oracle-instantclient']['basic-rpm'] = node['kernel']['machine'] == 'x86
 
 default['oracle-instantclient']['sqldeveloper-zip'] = 'sqldeveloper-4.0.3.16.84-no-jre.zip'
 
+default['oracle-instantclient']['default_user'] = 'ubuntu'
+default['oracle-instantclient']['java_home'] = '/usr/lib/jvm/java-7-openjdk-amd64/'
+
 # If this automatic attempt to deduce major version fails
 # then please set manually
 default['oracle-instantclient']['version'] = default['oracle-instantclient']['sqlplus-rpm'].split('-')[1].sub(/instantclient/, '')

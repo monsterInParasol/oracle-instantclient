@@ -31,3 +31,28 @@ bash 'symlink to sqldeveloper' do
     "ln -sf #{bin_path} /usr/local/bin/#{sd}"
     EOF
 end
+
+execute "set JAVA_HOME for sqldeveloper" do
+  default_user = node['oracle-instantclient']['default_user']
+  user default_user
+  cwd "/home/#{default_user}/.sqldeveloper/4.0.0/"
+  command %Q[sed -i 's:# \\(SetJavaHome \\).*$:\\1#{node['oracle-instantclient']['java_home']}:g' product.conf]
+end
+
+file "create sqldeveloper shortcut" do
+  default_user = node['oracle-instantclient']['default_user']
+  path "/home/#{default_user}/Desktop/sqldeveloper.desktop"
+  content <<-EOH
+[Desktop Entry]
+Exec=sqldeveloper
+Terminal=false
+StartupNotify=true
+Categories=GNOME;Oracle;
+Type=Application
+Icon=/opt/sqldeveloper/icon.png
+Name=Oracle SQL Developer
+  EOH
+  user default_user
+  group default_user
+end
+
